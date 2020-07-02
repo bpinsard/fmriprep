@@ -149,7 +149,8 @@ def _build_parser():
         metavar="PATH",
         type=PathExists,
         help="Reuse the anatomical derivatives from another fMRIPrep run or calculated "
-        "with an alternative processing tool (NOT RECOMMENDED).",
+        "with an alternative processing tool (NOT RECOMMENDED)."
+        "If different from ``<output-dir>/fmriprep``, ``--fs-subjects-dir`` is required.",
     )
 
     g_perfm = parser.add_argument_group("Options to handle performance")
