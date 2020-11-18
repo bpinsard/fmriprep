@@ -58,8 +58,11 @@ def _build_parser():
     def _bids_filter(value):
         from json import loads
 
-        if value and Path(value).exists():
-            return loads(Path(value).read_text(), object_hook=_filter_pybids_none_any)
+        if value:
+            if Path(value).exists():
+                return loads(Path(value).read_text(), object_hook=_filter_pybids_none_any)
+            else:
+                raise parser.error(f"Path does not exist: <{value}>.")
 
     verstr = f"fMRIPrep v{config.environment.version}"
     currentv = Version(config.environment.version)
