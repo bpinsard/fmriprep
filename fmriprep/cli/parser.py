@@ -56,13 +56,13 @@ def _build_parser():
         }
 
     def _bids_filter(value, parser):
-        from json import loads
+        from json import loads, JSONDecodeError
 
-        if value:
-            if Path(value).exists():
-                return loads(Path(value).read_text(), object_hook=_filter_pybids_none_any)
-            else:
-                raise parser.error(f"Path does not exist: <{value}>.")
+        path = _is_file(value, parser)
+        try:
+            return loads(path.read_text(), object_hook=_filter_pybids_none_any)
+        except JSONDecodeError:
+            parser.error(f"Invalid JSON file: <{value}>")
 
     verstr = f"fMRIPrep v{config.environment.version}"
     currentv = Version(config.environment.version)
