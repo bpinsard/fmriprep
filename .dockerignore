@@ -12,3 +12,7 @@ fmriprep.egg-info/**/*
 fmriprep.egg-info
 .eggs/**/*
 .eggs
+
+# docker files
+Dockerfile
+Dockerfile_devel
